@@ -1,7 +1,11 @@
-$color-red: red;
-$color-green: green;
 $color-blue: blue;
-$border: 1px solid;
+$color-green: green;
+$color-red: red;
+
+%common-style {
+    color: $color-green;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
 
 
 @mixin article-card($color, $border, $font-size) {
@@ -14,33 +18,38 @@ div {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: $border $color-red;
+    border: 1px solid red;
     padding: 10px;
     gap: 10px;
 
-    h1 {
-        color: $color-green;
-        font-family: Georgia, 'Times New Roman', Times, serif;
+    & h1 {
+        @extend %common-style;
         text-decoration: underline $color-blue;
         text-underline-offset: 8px;
     }
 
-    section {
+    & h2 {
+        @extend %common-style;
+        padding: 1rem;
+        border: 1px solid $color-red;
+    }
+
+    & section {
         display: flex;
         flex-direction: row;
     }
 }
 
 article {
-    @include article-card($color-green, $border $color-green, 1rem)
+    @include article-card($color-green, 1px solid $color-green, 1rem)
 }
 
 article:nth-of-type(odd) {
-    @include article-card($color-blue, $border $color-green, 1rem)
+    @include article-card($color-blue, 1px solid $color-green, 1rem)
 }
 
 section:last-of-type article {
-    @include article-card($color-green, $border $color-blue, 24px)
+    @include article-card($color-green, 1px solid $color-blue, 24px)
 }
 
 div section article p {
